@@ -1,0 +1,16 @@
+import pandas as pd
+
+# Sample data
+transactions_db = "transactions.json"
+transactions = pd.read_json(transactions_db)
+transactions['date'] = pd.to_datetime(transactions['date']).dt.strftime('%Y-%m-%d')
+
+# Append a new row to the DataFrame
+# Note: ignore_index=True is necessary here
+new_raw = {"id": 4, "date": "2023-06-03", "amount": 300}
+transactions = pd.concat([transactions, pd.DataFrame([new_raw])], ignore_index=True)
+
+# Write the updated DataFrame back to the JSON file
+transactions.to_json(transactions_db, orient='records', lines=False)
+
+print(transactions)
