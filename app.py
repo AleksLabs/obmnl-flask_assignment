@@ -30,9 +30,14 @@ def add_transaction():
 
 # Update operation
 @app.route('/udate/<int:transaction_id>', methods=['GET', 'POST'])
-def edit_transaction():
+def edit_transaction(transaction_id):
+    date = request.form["date"]
+    amount = request.form["amount"]
     if request.method == "POST":
-        pass
+        for transaction in transactions:
+            if transaction["id"] = transaction_id:
+                transaction["date"] = date
+                transaction["amount"] = amount
     return render_template('edit.html', transactions=transactions)
 
 # Delete operation
